@@ -1,0 +1,12 @@
+Uuid,Void/Retire,Short name:en,Fully specified name:en,Data class,Data Type,Members,_version:1,_order:450
+9d6bc13f-3f10-11e4-adec-0800271c1b75,,PO,Oral,Misc,N/A,,,
+33b16adb-8a92-11e4-977f-0800271c1b75,,TOPIC,Topical,Misc,N/A,,,
+33b2324f-8a92-11e4-977f-0800271c1b75,,RESPIR,Inhalation,Misc,N/A,,,
+9d6a6195-3f10-11e4-adec-0800271c1b75,,IM,Intramuscular,Misc,N/A,,,
+9d6b10cc-3f10-11e4-adec-0800271c1b75,,IV,Intravenous,Misc,N/A,,,
+f36097e7-7d66-4196-8d95-6b66f31435cc,,,See comments,Frequency,N/A,,,
+0de96a2d-5c2c-4110-9770-914369de1713,,,Opthalmic,Misc,N/A,,,
+99cbeb1b-621c-4645-a600-d702364d9885,,,Otic,Misc,N/A,,,
+9d6c9153-3f10-11e4-adec-0800271c1b75,,,Intravaginal,Misc,N/A,,,
+33b1c5a3-8a92-11e4-977f-0800271c1b75,,,Nasal,Misc,N/A,,,
+9d697972-3f10-11e4-adec-0800271c1b75,,,Drug routes,Misc,N/A,Oral; Topical; Inhalation; Intramuscular; Intravenous; Intravaginal; Nasal; Opthalmic; Otic; See comments,,

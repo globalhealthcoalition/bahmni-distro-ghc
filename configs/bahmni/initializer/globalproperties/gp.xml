@@ -1,0 +1,122 @@
+<config>
+  <globalProperties>
+    <globalProperty>
+      <property>exti18n.reverseI18nSupport</property>
+      <value>false</value>
+    </globalProperty>
+    <globalProperty>
+      <property>emrapi.visitExpireHours</property>
+      <value>0</value>
+    </globalProperty>
+    <globalProperty>
+      <property>emr.personImagesDirectory</property>
+      <value>/home/bahmni/patient_images</value>
+    </globalProperty>
+    <globalProperty>
+      <property>concept.reasonForDeath</property>
+      <value>Reason For Death</value>
+    </globalProperty>
+    <globalProperty>
+      <property>bahmni.extraPatientIdentifierTypes</property>
+      <value>0d2ac572-8de3-46c8-9976-1f78899c599f</value>
+    </globalProperty>
+    <globalProperty>
+      <property>bahmni.primaryIdentifierType</property>
+      <value>81433852-3f10-11e4-adec-0800271c1b75</value>
+    </globalProperty>
+    <globalProperty>
+      <property>bahmni.encountersession.duration</property>
+      <value>600</value>
+    </globalProperty>
+    <globalProperty>
+      <property>emrapi.sqlSearch.patientsEnrolledInPrograms</property>
+      <value>select
+        distinct concat(pn.given_name, ' ', ifnull(pn.family_name, '')) as name,
+        pi.identifier as identifier,
+        concat("", p.uuid) as uuid,
+        concat("", v.uuid) as activeVisitUuid
+    from
+        visit v
+        join person_name pn on v.patient_id = pn.person_id
+        and pn.voided = 0
+        join patient_identifier pi on v.patient_id = pi.patient_id
+        join patient_identifier_type pit on pi.identifier_type = pit.patient_identifier_type_id
+        join global_property gp on gp.property = "bahmni.primaryIdentifierType"
+        and gp.property_value = pit.uuid
+        join person p on p.person_id = v.patient_id
+        join location l on v.location_id = l.location_id
+        join patient_program pp on v.patient_id = pp.patient_id
+    where
+        v.voided = 0 AND pp.voided = 0 AND pp.date_enrolled is not null AND pp.date_completed is null;</value>
+    </globalProperty>
+    <globalProperty>
+      <property>emrapi.sqlSearch.drugOrderPatients</property>
+      <value>select distinct
+        concat(pn.given_name, " ", ifnull(pn.family_name,'')) as name,
+        pi.identifier as identifier,
+        concat("",p.uuid) as uuid,
+        concat("",v.uuid) as activeVisitUuid,
+        IF(va.value_reference = "Admitted", "true", "false") as hasBeenAdmitted
+      from visit v
+      join person_name pn on v.patient_id = pn.person_id and pn.voided = 0
+      join patient_identifier pi on v.patient_id = pi.patient_id
+      join patient_identifier_type pit on pi.identifier_type = pit.patient_identifier_type_id
+      join global_property gp on gp.property="bahmni.primaryIdentifierType" and gp.property_value=pit.uuid
+      join person p on p.person_id = v.patient_id
+      join orders on orders.patient_id = v.patient_id
+      join order_type on orders.order_type_id = order_type.order_type_id and order_type.name != "Order" and order_type.name = "Drug Order"
+      left outer join visit_attribute va on va.visit_id = v.visit_id and va.voided = 0 and va.attribute_type_id =
+        (select visit_attribute_type_id from visit_attribute_type where name="Admission Status")
+      where v.date_stopped is null AND v.voided = 0 and order_id not in
+        (select obs.order_id
+          from obs
+        where person_id = pn.person_id and order_id = orders.order_id);</value>
+    </globalProperty>
+    <globalProperty>
+      <property>emrapi.sqlSearch.drugOrderDispensedPatients</property>
+      <value>
+        select distinct
+          concat(pn.given_name, " ", ifnull(pn.family_name,'')) as name,
+          pi.identifier as identifier,
+          concat("",p.uuid) as uuid,
+          concat("",v.uuid) as activeVisitUuid,
+          IF(va.value_reference = "Admitted", "true", "false") as hasBeenAdmitted
+        from visit v
+        join person_name pn on v.patient_id = pn.person_id and pn.voided = 0
+        join patient_identifier pi on v.patient_id = pi.patient_id
+        join patient_identifier_type pit on pi.identifier_type = pit.patient_identifier_type_id
+        join global_property gp on gp.property="bahmni.primaryIdentifierType" and gp.property_value=pit.uuid
+        join person p on p.person_id = v.patient_id
+        join orders on orders.patient_id = v.patient_id
+        join order_type on orders.order_type_id = order_type.order_type_id and order_type.name != "Order" and order_type.name = "Drug Order"
+        left outer join visit_attribute va on va.visit_id = v.visit_id and va.voided = 0 and va.attribute_type_id =
+          (select visit_attribute_type_id from visit_attribute_type where name="Admission Status")
+        where v.date_stopped is null AND v.voided = 0 and order_id in
+          (select obs.order_id
+            from obs
+          where person_id = pn.person_id and order_id = orders.order_id);
+      </value>
+    </globalProperty>
+    <globalProperty>
+      <property>emrapi.sqlSearch.todayQueue</property>
+      <value>SELECT DISTINCT concat(pn.given_name, ' ', pn.family_name) AS name, pi.identifier AS identifier,  concat("", p.uuid) AS uuid,  concat("", v.uuid) AS activeVisitUuid, date_format(v.date_started,'%b %d %Y %H:%i') AS 'Registration time' FROM visit v JOIN person_name pn ON v.patient_id = pn.person_id AND date(v.date_started) = curdate() AND pn.voided = 0 and v.date_stopped is null and v.voided = 0 JOIN patient_identifier pi ON v.patient_id = pi.patient_id JOIN patient_identifier_type pit on pi.identifier_type = pit.patient_identifier_type_id
+        JOIN global_property gp on gp.property="bahmni.primaryIdentifierType" and gp.property_value=pit.uuid JOIN person p ON p.person_id = v.patient_id GROUP BY p.person_id ORDER BY v.date_started asc;</value>
+    </globalProperty>
+    <globalProperty>
+      <property>bahmniOfflineSync.strategy</property>
+      <value>org.bahmni.module.bahmniOfflineSync.strategy.AddressEntriesSyncStrategy</value>
+    </globalProperty>
+    <globalProperty>
+      <property>bahmniOfflineSync.addressEntriesSyncStrategy.locations</property>
+      <value>[{"uuid":"a160b5df-b832-4f69-a32a-7a975ad639a7"}]</value>
+    </globalProperty>
+    <globalProperty>
+      <property>emr.concept.diagnosisSetOfSets</property>
+      <value>dbc2ecdb-4e14-11e4-8a57-0800271c1b75</value>
+    </globalProperty>
+    <globalProperty>
+      <property>locale.allowed.list</property>
+      <value>en, es</value>
+    </globalProperty>
+  </globalProperties>
+</config>

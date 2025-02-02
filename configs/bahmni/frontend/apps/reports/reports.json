@@ -1,0 +1,430 @@
+{
+  "Diagnosis": {
+    "name": "Coded Diagnoses Entered",
+    "type": "MRSGeneric",
+    "requiredPrivilege": "app:reports",
+    "config": {
+      "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/diagnosis.sql"
+    }
+  },
+  "nonCodedDiagnosis": {
+    "name": "Non Coded Diagnoses Entered",
+    "type": "observations",
+    "requiredPrivilege": "app:reports",
+    "config": {
+      "conceptNamesToFilter": [
+        "Non-coded Diagnosis"
+      ],
+      "applyDateRangeFor": "obsDate",
+      "encounterPerRow": false,
+      "forDataAnalysis": false,
+      "excludeColumns": [
+        "Patient Name",
+        "Birthdate",
+        "Location Name",
+        "Program Name",
+        "Program Enrollment Date",
+        "Program End Date",
+        "Patient Created Date",
+        "Observation Datetime",
+        "Observation Date",
+        "Observation Created Date",
+        "Parent Concept"
+      ]
+    }
+  },
+  "obsCannedReport": {
+    "name": "Patient Characteristics",
+    "type": "obsCannedReport",
+    "requiredPrivilege": "app:reports",
+    "config": {
+      "patientAttributes": [
+        "occupation"
+      ],
+      "applyDateRangeFor": "ObsRecording",
+      "addressAttributes": [
+        "address2"
+      ],
+      "conceptNames": [
+        "Systolic",
+        "Diastolic",
+        "Pulse",
+        "Respiratory Rate",
+        "Oxygen Saturation",
+        "Smoking History",
+        "BMI",
+        "BMI STATUS",
+        "Weight"
+      ],
+      "visitIndependentConcept": [
+        "Height"
+      ],
+      "showObsOnlyForProgramDuration": false
+    }
+  },
+  "visitReport": {
+    "name": "Visit Report",
+    "type": "visits",
+    "requiredPrivilege": "app:reports",
+    "config": {
+      "forDataAnalysis": true,
+      "patientAttributes": [
+        "education",
+        "occupation",
+        "primaryContact"
+      ],
+      "visitAttributes": [
+        "Visit Status",
+        "Admission Status"
+      ],
+      "patientAddresses": [
+        "address2"
+      ],
+      "applyDateRangeFor": "visitStopDate",
+      "visitTypesToFilter": [
+        "Primary Care"
+      ]
+    }
+  },
+  "chiefComplaintReport": {
+    "name": "Chief Complaint Report",
+    "type": "aggregation",
+    "requiredPrivilege": "app:reports",
+    "config": {
+      "report": {
+        "type": "observations",
+        "config": {
+          "conceptNamesToFilter": [
+            "Chief Complaint"
+          ],
+          "showVisitInfo": true,
+          "forDataAnalysis": true,
+          "visitAttributes": [
+            "Visit Status",
+            "Admission Status"
+          ],
+          "visitTypesToFilter": [
+            "Primary Care"
+          ]
+        }
+      },
+      "rowGroups": [
+        "Gender"
+      ],
+      "columnGroups": [
+        "Concept Name"
+      ],
+      "distinctGroups": [
+        "Patient Identifier"
+      ],
+      "showTotalRow": true,
+      "showTotalColumn": true
+    }
+  },
+  "bloodPressure": {
+    "name": "Blood Pressure",
+    "type": "aggregation",
+    "requiredPrivilege": "app:reports",
+    "config": {
+      "report": {
+        "type": "observations",
+        "config": {
+          "conceptNamesToFilter": [
+            "Systolic",
+            "Diastolic"
+          ],
+          "showVisitInfo": true,
+          "forDataAnalysis": true,
+          "visitAttributes": [
+            "Visit Status",
+            "Admission Status"
+          ],
+          "visitTypesToFilter": [
+            "Primary Care"
+          ]
+        }
+      },
+      "rowGroups": [
+        "Gender"
+      ],
+      "columnGroups": [
+        "Concept Name"
+      ],
+      "distinctGroups": [
+        "Patient Identifier"
+      ]
+    }
+  },
+  "patientReport": {
+    "name": "Patient Information",
+    "type": "PatientReport",
+    "requiredPrivilege": "app:reports"
+  },
+  "SampleGenericProgramReport": {
+    "name": "Program Report",
+    "type": "programs",
+    "requiredPrivilege": "app:reports",
+    "config": {
+      "programAttributes": [
+        "Needs Surgery Status",
+        "Procedure",
+        "Priority 1",
+        "Priority 2",
+        "Priority 3",
+        "Consults Service",
+        "Primary Care Service",
+        "Clinical Urgency"
+      ],
+      "forDataAnalysis": true,
+      "showAllStates": true,
+      "programNamesToFilter": [
+        "Need for Surgery",
+        "Urgent follow up",
+        "Physical Therapy",
+        "Cita Abierta",
+        "Pre-operative clearance",
+        "Consults",
+        "Primary Care",
+        "Social work",
+        "Anthropometric Study"
+      ],
+      "excludeColumns": [
+        "Patient Created Date",
+        "Birthdate",
+        "End Date",
+        "Start Date",
+        "Program Id",
+        "Patient Id"
+      ]
+    }
+  },
+  "pivotReportForPrograms": {
+    "name": "Program Pivot Report",
+    "type": "aggregation",
+    "requiredPrivilege": "app:reports",
+    "config": {
+      "report": {
+        "type": "programs",
+        "config": {
+          "patientAttributes": [],
+          "patientAddresses": [
+            "address2"
+          ],
+          "programAttributes": [],
+          "forDataAnalysis": true,
+          "showAllStates": true,
+          "programNamesToFilter": [
+            "Need for Surgery",
+            "Urgent follow up",
+            "Physical Therapy",
+            "Cita Abierta",
+            "Pre-operative clearance",
+            "Consults",
+            "Primary Care",
+            "Social work"
+          ]
+        }
+      },
+      "columnGroups": [
+        "Program name"
+      ],
+      "rowGroups": [
+        "Gender"
+      ],
+      "distinctGroups": [
+        "Patient Identifier"
+      ],
+      "showTotalRow": true,
+      "showTotalColumn": true
+    }
+  },
+  "NeedForSurgery": {
+    "name": "Need For Surgery",
+    "type": "programs",
+    "requiredPrivilege": "app:reports",
+    "config": {
+      "programAttributes": [
+        "Needs Surgery Status",
+        "Procedure",
+        "Priority 1",
+        "Priority 2",
+        "Priority 3"
+      ],
+      "forDataAnalysis": true,
+      "showAllStates": true,
+      "programNamesToFilter": [
+        "Need for Surgery"
+      ],
+      "excludeColumns": [
+        "Patient Created Date",
+        "Birthdate",
+        "Program Name",
+        "End Date",
+        "Start Date",
+        "Program Id",
+        "Patient Id"
+      ]
+    }
+  },
+  "UrgentFollowUp": {
+    "name": "Urgent follow up",
+    "type": "programs",
+    "requiredPrivilege": "app:reports",
+    "config": {
+      "programAttributes": [],
+      "forDataAnalysis": true,
+      "showAllStates": true,
+      "programNamesToFilter": [
+        "Urgent follow up"
+      ],
+      "excludeColumns": [
+        "Patient Created Date",
+        "Birthdate",
+        "Program Name",
+        "End Date",
+        "State",
+        "Start Date",
+        "Program Id",
+        "Patient Id"
+      ]
+    }
+  },
+  "PhysicalTherapy": {
+    "name": "Physical Therapy",
+    "type": "programs",
+    "requiredPrivilege": "app:reports",
+    "config": {
+      "programAttributes": [],
+      "forDataAnalysis": true,
+      "showAllStates": true,
+      "programNamesToFilter": [
+        "Physical Therapy"
+      ],
+      "excludeColumns": [
+        "Patient Created Date",
+        "Birthdate",
+        "Program Name",
+        "End Date",
+        "State",
+        "Start Date",
+        "Program Id",
+        "Patient Id"
+      ]
+    }
+  },
+  "CitaAbierta": {
+    "name": "Cita Abierta",
+    "type": "programs",
+    "requiredPrivilege": "app:reports",
+    "config": {
+      "programAttributes": [],
+      "forDataAnalysis": true,
+      "showAllStates": true,
+      "programNamesToFilter": [
+        "Cita Abierta"
+      ],
+      "excludeColumns": [
+        "Patient Created Date",
+        "Birthdate",
+        "Program Name",
+        "End Date",
+        "State",
+        "Start Date",
+        "Program Id",
+        "Patient Id"
+      ]
+    }
+  },
+  "Consults": {
+    "name": "Consults",
+    "type": "programs",
+    "requiredPrivilege": "app:reports",
+    "config": {
+      "programAttributes": [
+        "Consults Service"
+      ],
+      "forDataAnalysis": true,
+      "showAllStates": true,
+      "programNamesToFilter": [
+        "Consults"
+      ],
+      "excludeColumns": [
+        "Patient Created Date",
+        "Birthdate",
+        "Program Name",
+        "End Date",
+        "Start Date",
+        "Program Id",
+        "Patient Id"
+      ]
+    }
+  },
+  "PrimaryCare": {
+    "name": "Primary Care",
+    "type": "programs",
+    "requiredPrivilege": "app:reports",
+    "config": {
+      "programAttributes": [
+        "Primary Care Service"
+      ],
+      "forDataAnalysis": true,
+      "showAllStates": true,
+      "programNamesToFilter": [
+        "Primary Care"
+      ],
+      "excludeColumns": [
+        "Patient Created Date",
+        "Birthdate",
+        "Program Name",
+        "End Date",
+        "Start Date",
+        "Program Id",
+        "Patient Id"
+      ]
+    }
+  },
+  "SocialWork": {
+    "name": "Social work",
+    "type": "programs",
+    "requiredPrivilege": "app:reports",
+    "config": {
+      "programAttributes": ["Clinical Urgency"],
+      "forDataAnalysis": true,
+      "showAllStates": true,
+      "programNamesToFilter": [
+        "Social work"
+      ],
+      "excludeColumns": [
+        "Patient Created Date",
+        "Birthdate",
+        "Program Name",
+        "End Date",
+        "Start Date",
+        "Program Id",
+        "Patient Id"
+      ]
+    }
+  },
+  "AnthropometricStudy": {
+    "name": "Anthropometric Study",
+    "type": "programs",
+    "requiredPrivilege": "app:reports",
+    "config": {
+      "programAttributes": [],
+      "forDataAnalysis": true,
+      "showAllStates": true,
+      "programNamesToFilter": [
+        "Anthropometric Study"
+      ],
+      "excludeColumns": [
+        "Patient Created Date",
+        "Birthdate",
+        "Program Name",
+        "End Date",
+        "Start Date",
+        "Program Id",
+        "Patient Id"
+      ]
+    }
+  }
+}
