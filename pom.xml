@@ -69,8 +69,8 @@
                   <directory>${project.build.directory}/ozone</directory>
                   <excludes>
                     <exclude>distro/configs/openmrs/**</exclude>
-                    <exclude>distro/configs/bahmni/initializer/**</exclude>
-                    <exclude>distro/configs/bahmni/frontend/**</exclude>
+                    <exclude>distro/configs/bahmniemr/initializer/**</exclude>
+                    <exclude>distro/configs/bahmniemr/frontend/**</exclude>
                   </excludes>
                 </resource>
               </resources>
@@ -178,7 +178,7 @@
                   <target>
                     <copy todir="${project.build.directory}/validator/configuration">
                       <fileset
-                        dir="${project.build.directory}/${project.artifactId}-${project.version}/distro/configs/bahmni/initializer" />
+                        dir="${project.build.directory}/${project.artifactId}-${project.version}/distro/configs/bahmniemr/initializer" />
                     </copy>
                   </target>
                 </configuration>
