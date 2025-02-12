@@ -92,7 +92,7 @@
                 <resource>
                   <directory>${project.basedir}/scripts</directory>
                   <includes>
-                    <!-- <include>docker-compose-override.yml</include> -->
+                    <include>docker-compose-override.yml</include>
                     <include>docker-compose-files.txt</include>
                   </includes>
                   <filtering>true</filtering>

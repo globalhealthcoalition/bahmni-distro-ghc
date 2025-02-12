@@ -1,8 +1,6 @@
 services:
 
-  env-substitution:
+  # Bahmni EIP routes
+  eip-bahmni:
     environment:
-      - ODOO_HOST=${ODOO_HOST:-http://odoo}
-      - ODOO_USER=${ODOO_USER}
-      - ODOO_PASSWORD=${ODOO_PASSWORD}
-      - ODOO_DB=${ODOO_DB:-odoo}
+      - BAHMNI_TEST_ORDER_TYPE_UUID=33a6291c-8a92-11e4-977f-0800271c1b75
