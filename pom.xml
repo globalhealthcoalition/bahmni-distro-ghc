@@ -108,7 +108,7 @@
             </goals>
             <configuration>
               <outputDirectory>
-                ${project.build.directory}/${project.artifactId}-${project.version}/binaries/bahmniemr/modules</outputDirectory>
+                ${project.build.directory}/${project.artifactId}-${project.version}/distro/binaries/bahmniemr/modules</outputDirectory>
               <overwrite>true</overwrite>
               <resources>
                 <resource>
