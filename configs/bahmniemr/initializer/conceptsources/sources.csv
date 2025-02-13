@@ -1,0 +1,8 @@
+Uuid,Void/Retire,Name,Description,HL7 Code,Unique ID
+0e27cfb7-1d70-11ec-b667-0242ac150008,,CEIL,CEIL Bacteriology concept source,CEIL,
+0e2890d9-1d70-11ec-b667-0242ac150008,,org.openmrs.module.bacteriology,concept source for bacteriology module,BACT,
+0fe5b8d7-1d70-11ec-b667-0242ac150008,,org.openmrs.module.emrapi,Source used to tag concepts used in the EMR API module,,
+105abcb8-1d70-11ec-b667-0242ac150008,,SNOMED,SNOMED Duration Source,SCT,
+11113994-1d70-11ec-b667-0242ac150008,,Abbreviation,Custom dictionary for storing abbreviation of concepts,,
+9be62d54-16a8-4d83-a668-0826773309fb,,CIEL,Columbia International eHealth Laboratory (CIEL) concept source for OpenMRS,CIEL,
+dbe4f23e-4e14-11e4-8a57-0800271c1b75,,ICD 10 - WHO,ICD 10 Concept mappings,ICD 10 - WHO,
