@@ -44,7 +44,6 @@
       <version>1.0.0-SNAPSHOT</version>
     </dependency>
     <!-- TODO: Add any implementation-specific dependencies -->
-    </dependency>
   </dependencies>
 
   <build>
